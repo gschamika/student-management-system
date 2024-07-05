@@ -1,0 +1,7 @@
+package com.example.sms.excepton;
+
+public class ResourceNotFoundException extends RuntimeException{
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
