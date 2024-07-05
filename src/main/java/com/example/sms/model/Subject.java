@@ -21,6 +21,22 @@ public class Subject {
     @ManyToMany(mappedBy = "subjects")
     private Set<Course> courses = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "subject_lecturer",
+            joinColumns = @JoinColumn(name = "subject_id"),
+            inverseJoinColumns = @JoinColumn(name = "lecturer_id")
+    )
+    private Set<Lecturer> lecturers = new HashSet<>();
+
+    public Set<Lecturer> getLecturers() {
+        return lecturers;
+    }
+
+    public void setLecturers(Set<Lecturer> lecturers) {
+        this.lecturers = lecturers;
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,4 +68,5 @@ public class Subject {
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
+
 }
