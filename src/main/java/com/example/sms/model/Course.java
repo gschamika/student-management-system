@@ -1,5 +1,6 @@
 package com.example.sms.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -36,6 +37,7 @@ public class Course {
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
+    @JsonBackReference
     private Set<Subject> subjects = new HashSet<>();
 
     public Long getId() {

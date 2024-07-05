@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "lecturer")
-public class Lecturer {
+@Table(name = "student")
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +26,7 @@ public class Lecturer {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "nic", unique = true)
@@ -38,15 +38,20 @@ public class Lecturer {
     @Column(name = "dob")
     private LocalDate dob;
 
-    @Column(name = "degree")
-    private String degree;
+    @Column(name = "school_or_university")
+    private String schoolOrUniversity;
 
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate = LocalDate.now();
 
-    @ManyToMany(mappedBy = "lecturers")
+    @ManyToMany
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     @JsonIgnore
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<Course> courses = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {
@@ -125,12 +130,12 @@ public class Lecturer {
         this.dob = dob;
     }
 
-    public String getDegree() {
-        return degree;
+    public String getSchoolOrUniversity() {
+        return schoolOrUniversity;
     }
 
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setSchoolOrUniversity(String schoolOrUniversity) {
+        this.schoolOrUniversity = schoolOrUniversity;
     }
 
     public LocalDate getRegistrationDate() {
@@ -141,11 +146,11 @@ public class Lecturer {
         this.registrationDate = registrationDate;
     }
 
-    public Set<Subject> getSubjects() {
-        return subjects;
+    public Set<Course> getCourses() {
+        return courses;
     }
 
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

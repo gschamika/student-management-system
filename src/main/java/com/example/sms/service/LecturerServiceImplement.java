@@ -38,7 +38,7 @@ public class LecturerServiceImplement implements LecturerService{
         lecturer.setGender(lecturerDetails.getGender());
         lecturer.setDob(lecturerDetails.getDob());
         lecturer.setDegree(lecturerDetails.getDegree());
-        // Update other fields as needed
+
         return lecturerRepository.save(lecturer);
     }
 
