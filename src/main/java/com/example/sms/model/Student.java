@@ -1,6 +1,7 @@
 package com.example.sms.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -44,13 +45,13 @@ public class Student {
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate = LocalDate.now();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    @JsonIgnore
+    @JsonIgnoreProperties("students")
     private Set<Course> courses = new HashSet<>();
 
     @PrePersist

@@ -37,9 +37,10 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 
-    @GetMapping("/{id}") // Get student details by ID
+    @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
-        return ResponseEntity.ok(studentService.getStudentById(id));
+        Student student = studentService.getStudentById(id);
+        return ResponseEntity.ok(student);
     }
 
     @GetMapping("/search") // Search students by first name

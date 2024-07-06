@@ -1,8 +1,8 @@
 package com.example.sms.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,8 +44,13 @@ public class Lecturer {
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate = LocalDate.now();
 
-    @ManyToMany(mappedBy = "lecturers")
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "lecturer_subject",
+            joinColumns = @JoinColumn(name = "lecturer_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    @JsonIgnoreProperties("lecturers")
     private Set<Subject> subjects = new HashSet<>();
 
     @PrePersist

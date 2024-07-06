@@ -53,10 +53,8 @@ public class StudentServiceImplement implements StudentService{
 
     @Override
     public Student getStudentById(Long id) {
-        Student student = studentRepository.findById(id)
+        return studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found with ID: " + id));
-        student.getCourses().forEach(course -> course.getSubjects().size());
-        return student;
     }
 
     @Override

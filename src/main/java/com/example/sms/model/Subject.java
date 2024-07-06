@@ -2,6 +2,7 @@ package com.example.sms.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -20,17 +21,12 @@ public class Subject {
     @Column(name = "subject_description")
     private String description;
 
-    @ManyToMany(mappedBy = "subjects")
-    @JsonIgnore
+    @ManyToMany(mappedBy = "subjects", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("subjects")
     private Set<Course> courses = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "subject_lecturer",
-            joinColumns = @JoinColumn(name = "subject_id"),
-            inverseJoinColumns = @JoinColumn(name = "lecturer_id")
-    )
-    @JsonBackReference
+    @ManyToMany(mappedBy = "subjects", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("subjects")
     private Set<Lecturer> lecturers = new HashSet<>();
 
     public Set<Lecturer> getLecturers() {

@@ -32,9 +32,10 @@ public class LecturerController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}") // get lecturer by id
+    @GetMapping("/{id}")
     public ResponseEntity<Lecturer> getLecturerById(@PathVariable Long id) {
-        return ResponseEntity.ok(lecturerService.getLecturerById(id));
+        Lecturer lecturer = lecturerService.getLecturerById(id);
+        return ResponseEntity.ok(lecturer);
     }
 
     @GetMapping // get all lecturers
