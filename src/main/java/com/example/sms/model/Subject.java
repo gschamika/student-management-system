@@ -1,7 +1,6 @@
 package com.example.sms.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -66,5 +65,4 @@ public class Subject {
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
-
 }
