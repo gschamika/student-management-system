@@ -1,10 +1,8 @@
 package com.example.sms.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,11 +20,11 @@ public class Subject {
     private String description;
 
     @ManyToMany(mappedBy = "subjects", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("subjects")
+    @JsonIgnore
     private Set<Course> courses = new HashSet<>();
 
     @ManyToMany(mappedBy = "subjects", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("subjects")
+    @JsonIgnore
     private Set<Lecturer> lecturers = new HashSet<>();
 
     public Set<Lecturer> getLecturers() {

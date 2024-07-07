@@ -1,6 +1,7 @@
 package com.example.sms.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -32,17 +33,17 @@ public class Course {
     @Column(name="course_endDate")
     private LocalDate endDate;
 
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("courses")
+    @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private Set<Student> students = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "course_subject",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
-    @JsonIgnoreProperties("courses")
+    @JsonIgnore
     private Set<Subject> subjects = new HashSet<>();
 
     public Long getId() {
@@ -107,5 +108,13 @@ public class Course {
 
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }
