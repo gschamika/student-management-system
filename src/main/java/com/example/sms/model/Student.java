@@ -1,9 +1,7 @@
 package com.example.sms.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
